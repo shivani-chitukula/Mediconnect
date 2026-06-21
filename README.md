@@ -1,5 +1,10 @@
 # Mediconnect 🩺
 
+![Python](https://img.shields.io/badge/Python-3.9+-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
+![Gemini](https://img.shields.io/badge/Google_Gemini-4285F4?style=for-the-badge&logo=google&logoColor=white)
+![NLTK](https://img.shields.io/badge/NLTK-NLP-green?style=for-the-badge)
+
 Mediconnect is an advanced, LLM-powered healthcare companion and symptom-to-medicine prediction dashboard. It leverages Natural Language Processing (NLP) classifiers for initial clinical condition mapping, and utilizes the **Google Gemini API** for generating non-clinical advice, precautions, and online pharmacy redirect options.
 
 ---
