@@ -89,15 +89,59 @@ The app will be accessible at `http://localhost:8501`.
 
 ---
 
-## 🧠 Model Training Details (NLP Pipeline)
-1. **Preprocessing (NLTK)**: Removes stop words, tokenizes clinical reviews, and lemmatizes symptoms using WordNetLemmatizer and PorterStemmer.
-2. **Feature Extraction**: Converts preprocessed reviews into n-gram representation using `TfidfVectorizer` (supports unigram, bigram, and trigram ranges up to `ngram_range=(1,3)`).
-3. **Classification**: Fits a **PassiveAggressiveClassifier** to learn online weights, yielding:
-   - Multinomial Naive Bayes (Bag of Words): **89.8%**
-   - PassiveAggressiveClassifier (Bag of Words): **91.0%**
-   - PassiveAggressiveClassifier (TF-IDF Unigrams): **92.3%**
-   - PassiveAggressiveClassifier (TF-IDF Bigrams): **94.2%**
-   - PassiveAggressiveClassifier (TF-IDF Trigrams): **94.3%** (Selected)
+## 🧠 Model Training Details
+
+### Dataset
+
+**Source:** [UCI ML Drug Review Dataset](https://archive.ics.uci.edu/dataset/462/drug+review+dataset+drugs+com) (drugsComTrain_raw.csv / drugsComTest_raw.csv)
+
+| Split | Records |
+|---|---|
+| Train | ~161,000 reviews |
+| Test | ~53,000 reviews |
+
+**Target conditions (11 classes):**
+Depression · Anxiety · Insomnia · GERD · Acne · Birth Control · Diabetes · High Blood Pressure · Pain · Allergies · Thyroid Disorders
+
+---
+
+### NLP Preprocessing Pipeline
+
+1. **Tokenization** — NLTK word tokenizer splits raw patient reviews into tokens
+2. **Stop word removal** — NLTK English stop words filtered out
+3. **Lemmatization** — WordNetLemmatizer normalizes word forms (e.g. "running" → "run")
+4. **Stemming** — PorterStemmer reduces words to root form for consistency
+5. **Feature extraction** — TfidfVectorizer with `ngram_range=(1,3)` (unigram + bigram + trigram)
+
+---
+
+### Model Benchmarking
+
+All models trained on the same preprocessed corpus. Results on held-out validation split:
+
+| Model | Vectorizer | Accuracy |
+|---|---|---|
+| Multinomial Naive Bayes | Bag of Words | 89.8% |
+| PassiveAggressiveClassifier | Bag of Words | 91.0% |
+| PassiveAggressiveClassifier | TF-IDF Unigrams | 92.3% |
+| PassiveAggressiveClassifier | TF-IDF Bigrams | 94.2% |
+| **PassiveAggressiveClassifier** | **TF-IDF Trigrams** | **94.3% ✓ Selected** |
+
+**Why PassiveAggressiveClassifier?**
+Online learning algorithm — updates weights only when it makes a mistake ("passive" on correct predictions, "aggressive" on errors). Outperforms Naive Bayes on this dataset because it handles large sparse TF-IDF feature spaces better and doesn't assume feature independence.
+
+---
+
+### Serialized Model Artifacts
+
+```text
+models/
+├── tfidf_trigrams_model.pkl     # Trained PassiveAggressiveClassifier (~138MB)
+└── tfidf_vectorizer3.pkl        # Fitted TfidfVectorizer (trigram, vocabulary preserved)
+```
+
+> **Note:** Model weights exceed GitHub's 100MB limit and are excluded via `.gitignore`.
+> To reproduce: run `notebooks/disease_prediction.ipynb` end-to-end, which trains and serializes both artifacts automatically.
 
 ---
 
