@@ -96,6 +96,33 @@ The app will be accessible at `http://localhost:8501`.
 
 ---
 
+## UI Preview
+
+<img width="1548" height="785" alt="image" src="https://github.com/user-attachments/assets/14336cdd-4d3f-477d-91af-887f3e5eddad" />
+
+---
+
+<img width="1527" height="785" alt="image" src="https://github.com/user-attachments/assets/39072b9a-033b-4faf-907f-beac41aeda02" />
+
+---
+
+<img width="737" height="775" alt="image" src="https://github.com/user-attachments/assets/51f91953-d3af-4713-a119-a2e3ebf682e4" />
+
+---
+
+<img width="1538" height="799" alt="image" src="https://github.com/user-attachments/assets/c1839a2a-10ec-462f-9eda-277b215024c7" />
+
+---
+
+<img width="1463" height="795" alt="image" src="https://github.com/user-attachments/assets/c1d1a7e5-bc2b-40b8-92ea-4e6c2a20261a" />
+
+---
+
+<img width="1475" height="822" alt="image" src="https://github.com/user-attachments/assets/6bd8b259-748b-434d-a380-528388f08fbf" />
+
+---
+
+
 ## ⚠️ Disclaimer
 
 This application is for **educational and information purposes only**. It does not provide professional medical advice, diagnosis, or treatment. Always consult a certified healthcare professional before starting any treatment plan.
